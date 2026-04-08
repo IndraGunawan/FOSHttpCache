@@ -29,6 +29,7 @@ Symfony Cache ✓       ✓               ✓ (1)             ✓ (1)
 Cloudflare    ✓                       ✓       ✓         ✓
 Noop          ✓       ✓       ✓       ✓       ✓         ✓
 Multiplexer   ✓       ✓       ✓       ✓       ✓         ✓
+Souin         ✓                       ✓       ✓         ✓
 ============= ======= ======= ======= ======= ========= =======
 
 | (*): A limited version of Ban, that allows to invalidate by the beginning of a path
@@ -362,6 +363,33 @@ To find the zone identifier for your domain request this from the API::
 
 The zone identifier is returned in the ``id`` field of the results and is a
 32-character hexadecimal string.
+
+.. _souin client:
+
+Souin Client
+~~~~~~~~~~~~
+
+The Souin client for Caddy sends HTTP requests with the ``HttpDispatcher``.
+Create the dispatcher as explained :ref:`above <HTTP client configuration>`
+and pass it to the Souin client::
+
+    use FOS\HttpCache\ProxyClient\Souin;
+
+    $souin = new Souin($httpDispatcher);
+
+.. note::
+
+    To make invalidation work, you need to :doc:`configure Souin <souin-configuration>`
+    accordingly. Specifically, the Souin API must be enabled.
+
+You can pass the following options to the Souin client:
+
+* ``api_basepath`` (default: ``/souin-api/souin``): The base path of the Souin
+  management API;
+* ``purge_method`` (default: ``PURGE``): The HTTP method used for purge
+  requests;
+* ``tags_header`` (default: ``Surrogate-Key``): The HTTP header used to specify
+  which tags to invalidate.
 
 Noop Client
 ~~~~~~~~~~~

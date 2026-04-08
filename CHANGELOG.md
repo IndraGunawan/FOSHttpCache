@@ -6,6 +6,11 @@ See also the [GitHub releases page](https://github.com/FriendsOfSymfony/FOSHttpC
 3.x
 ===
 
+3.3.0
+------
+
+* Added Souin proxy client.
+
 3.2.0
 -----
 
